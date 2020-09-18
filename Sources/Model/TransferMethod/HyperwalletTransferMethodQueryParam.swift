@@ -22,25 +22,22 @@ import Foundation
 public class HyperwalletTransferMethodQueryParam: QueryParam {
     private enum QueryParam: String {
         case status
+        case type
     }
     /// Returns transfer method with this status.
     public var status: QueryStatus?
+    /// The transfer method  type.
+    public var type: QueryType?
 
-    /// Representation of the transfer method status
+    /// Representation of the bank account status
     public enum QueryStatus: String {
-        /// Filter by activated transfer methods
+        /// Filter by activated bank accounts
         case activated = "ACTIVATED"
-        /// Filter by deActivated transfer methods
+        /// Filter by deActivated bank accounts
         case deActivated = "DE_ACTIVATED"
-        /// Filter only invalid transfer methods
+        /// Filter only invalid bank accounts
         case invalid = "INVALID"
-        /// Filter only lostOrStolen prepaid cards
-        case lostOrStolen = "LOST_OR_STOLEN"
-        /// Filter by preActivated prepaid cards
-        case preActivated = "PRE_ACTIVATED"
-        /// Filter only suspended prepaid cards
-        case suspended = "SUSPENDED"
-        /// Filter only verified transfer methods
+        /// Filter only verified bank accounts
         case verified = "VERIFIED"
     }
 
@@ -56,11 +53,31 @@ public class HyperwalletTransferMethodQueryParam: QueryParam {
         case descendantStatus = "-status"
     }
 
+    /// Represents the Bank Account types.
+    public enum QueryType: String {
+        /// The Bank account type
+        case bankAccount = "BANK_ACCOUNT"
+        /// The Wire account type
+        case wireAccount = "WIRE_ACCOUNT"
+        /// The Bank Card  type
+        case bankCard = "BANK_CARD"
+        /// The PayPal account type
+        case payPalAccount = "PAYPAL_ACCOUNT"
+        /// The Prepaid Card  type
+        case prepaidCard = "PREPAID_CARD"
+        /// The Venmo account type 
+        case venmoAccount = "VENMO_ACCOUNT"
+    }
+
     override public func toQuery() -> [String: String] {
         var query = super.toQuery()
 
         if let status = status {
             query[QueryParam.status.rawValue] = status.rawValue
+        }
+
+        if let type = type {
+            query[QueryParam.type.rawValue] = type.rawValue
         }
         return query
     }

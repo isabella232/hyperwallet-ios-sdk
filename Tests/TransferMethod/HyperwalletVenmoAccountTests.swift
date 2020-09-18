@@ -196,7 +196,7 @@ class HyperwalletVenmoAccountTests: XCTestCase {
 
         // When
         let venmoQuery = HyperwalletVenmoQueryParam()
-        venmoQuery.status = .deActivated
+        venmoQuery.status = HyperwalletVenmoQueryParam.QueryStatus.deActivated
 
         // When
         Hyperwallet.shared.listVenmoAccounts(queryParam: venmoQuery) { (result, error) in

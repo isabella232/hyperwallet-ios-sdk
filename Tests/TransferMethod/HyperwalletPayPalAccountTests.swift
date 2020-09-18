@@ -265,7 +265,7 @@ class HyperwalletPayPalAccountTests: XCTestCase {
 
         // When
         let payPalAccountQueryParam = HyperwalletPayPalAccountQueryParam()
-        payPalAccountQueryParam.status = .activated
+        payPalAccountQueryParam.status = HyperwalletPayPalAccountQueryParam.QueryStatus.activated
         payPalAccountQueryParam.createdAfter = ISO8601DateFormatter.ignoreTimeZone.date(from: "2018-12-15T00:30:11")
 
         Hyperwallet.shared.listPayPalAccounts(queryParam: payPalAccountQueryParam) { (result, error) in
